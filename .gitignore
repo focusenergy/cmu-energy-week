@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 .idea
+*.tar.gz
 
 # Compiled python modules.
 *.pyc
