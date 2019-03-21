@@ -5,7 +5,7 @@ from pkg_resources import resource_filename
 import gzip
 import pickle
 
-TEST_DATA_FILE = resource_filename('', 'test_data.pklz')
+TEST_DATA_FILE = resource_filename('test_harness', 'test_data.pklz')
 
 
 class TestDataGenerator(object):

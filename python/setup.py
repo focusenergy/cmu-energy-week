@@ -16,7 +16,7 @@ setup(
     author_email='Brian.Baingana@nexteraanalytics.com',
     license='Commercial',
     package_dir={'': 'src'},
-    package_data={'': ['src/test_harness/test_data.pklz']},
+    package_data={'test_harness': ['test_data.pklz']},
     include_package_data=True,
     packages=find_packages('src'),
     install_requires=['pandas'],
