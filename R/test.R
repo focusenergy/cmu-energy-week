@@ -5,10 +5,11 @@ library(magrittr)
 devtools::load_all('TestHarness')
 
 
-# An example prediction function - replace with a function that calls your trained model
+# An example prediction function - replace with a function that calls your trained model.
 persistence <- function(runtime, load, horizon = 24) {
+  # This prediction simply carries the present value forward to future values.
 
-  validtime <- runtime + as.difftime(0:(horizon-1), units = 'hours')
+  validtime <- runtime + as.difftime(seq_len(horizon)-1, units = 'hours')
 
   load %<>%
     mutate(hour = hour(validtime)) %>%
