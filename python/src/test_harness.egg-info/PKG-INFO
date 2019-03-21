@@ -1,0 +1,23 @@
+Metadata-Version: 1.2
+Name: test-harness
+Version: 0.1
+Summary: Test harness for CMU load forecasting challenge
+Home-page: https://gitlab.windlogics.com/Brian.Baingana/cmu-energy-week.git
+Author: NextEra Analytics, Inc.
+Author-email: Brian.Baingana@nexteraanalytics.com
+License: Commercial
+Description: # Load forecasting test harness
+        
+        This package simulates real-time load forecasting
+        test data, and facilitates testing with known data-availability
+        constraints.
+        
+        ## Installation
+        
+        To install the package, run 
+        
+        `python setup.py install`
+        
+        within the top-level directory of the package source.
+Platform: UNKNOWN
+Requires-Python: >= 3.6
