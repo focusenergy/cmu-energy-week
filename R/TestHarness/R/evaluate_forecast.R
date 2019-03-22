@@ -35,7 +35,7 @@ evaluate_forecast <- function(forecast_load, actual_load) {
            square_error = error^2)
 
   mae <- mean(errors$absolute_error, na.rm = TRUE)
-  rmse <- mean(errors$square_error, na.rm = TRUE)
+  rmse <- sqrt(mean(errors$square_error, na.rm = TRUE))
 
   hourly_metrics <- errors %>%
     mutate(hour = hour(validtime)) %>%
