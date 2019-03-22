@@ -34,9 +34,17 @@ persistence <- function(runtime, load, horizon = 24) {
 #'
 #' @param predict.fun a function that takes arguments `runtime` (a `POSIXt` object), `load` (a
 #'   data.frame), and `horizon` (number of forward timesteps to make predictions)
-run <- function(predict.fun) {
+#'
+#' @param test_data a list comprising the following dataframes:
+#' \itemize{
+#'  \item{"load"}{Load data with columns `c('validtime', 'target_load')`}
+#'  \item{"gfs"}{GFS data with columns `c('runtime', 'validtime', 'Temp.*', 'Relative_humidity.*')`}
+#'  \item{"nam"}{NAM data comprising columns `c('runtime', 'validtime', 'Temp.*', 'DewPoint.*')`}
+#'  }
+#'
+run <- function(predict.fun, test_data) {
 
-  test_data_gen <- TestDataGenerator$new()
+  test_data_gen <- TestDataGenerator$new(test_data = test_data)
   results <- data.frame()
 
   while(TRUE) {
@@ -49,13 +57,16 @@ run <- function(predict.fun) {
     runtime <- d$runtime
     flog.info('Runtime: %s ', as.character(runtime))
 
-    load_1 <- d$data$load_1$load
-    forecast <- predict.fun(runtime, load_1)
+    load<- d$data$load
+    forecast <- predict.fun(runtime, load)
 
     results %<>%
       bind_rows(forecast)
   }
 }
 
-results <- run(persistence)
+test_data <- simulate_dataset()
+results <- run(persistence, test_data)
+evaluation_metrics <- evaluate_forecast(results, test_data$load)
 write.csv(results, 'results.csv')
+write.csv(evaluation_metrics$hourly_metrics, 'hourly_error_metrics.csv')
